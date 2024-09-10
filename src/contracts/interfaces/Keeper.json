@@ -1,0 +1,39 @@
+{
+	"contracts": [
+		{
+			"contractName": "Keeper",
+			"constructorInputs": [
+				{
+					"name": "pkh",
+					"type": "bytes20",
+					"visible": false,
+					"unused": false
+				}
+			],
+			"abi": [
+				{
+					"name": "sweep",
+					"inputs": [
+						{
+							"name": "pubKeeper",
+							"type": "pubkey"
+						},
+						{
+							"name": "keeperSig",
+							"type": "sig"
+						}
+					]
+				}
+			],
+			"dependencies": [],
+			"bytecode": "OP_FROMALTSTACK OP_OVER OP_HASH160 OP_EQUALVERIFY OP_CHECKSIGVERIFY",
+			"contracts": []
+		}
+	],
+	"source": "pragma nexscript ^1.0.2;\r\n\r\ncontract Keeper(bytes20 pkh) {\r\n    function sweep(pubkey pubKeeper, sig keeperSig) {\r\n        require(hash160(pubKeeper) == pkh);\r\n        require(checkSig(keeperSig, pubKeeper));\r\n    }\r\n}\r\n",
+	"compiler": {
+		"name": "nexc",
+		"version": "1.0.2"
+	},
+	"updatedAt": "2024-09-05T15:22:42.583Z"
+}
